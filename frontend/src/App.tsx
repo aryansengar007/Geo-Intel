@@ -163,15 +163,27 @@ fetchInitialData();
 }, []);
 
 const selectedBefore = useMemo(
-() => scenes.find((scene) => scene.scene_id === beforeScene),
-[beforeScene, scenes],
+  () => scenes.find((scene) => scene.scene_id === beforeScene),
+  [beforeScene, scenes],
 );
 
 const selectedAfter = useMemo(
-() => scenes.find((scene) => scene.scene_id === afterScene),
-[afterScene, scenes],
+  () => scenes.find((scene) => scene.scene_id === afterScene),
+  [afterScene, scenes],
 );
 
+const beforeImageUrl =
+  `${API_BASE}/api/scenes/${beforeScene}/preview`;
+
+const afterImageUrl =
+  `${API_BASE}/api/scenes/${afterScene}/preview`;
+
+const changeOverlayUrl =
+  analysis && beforeScene && afterScene
+    ? `${API_BASE}/api/change-analysis/overlay?before_scene=${encodeURIComponent(
+        beforeScene
+      )}&after_scene=${encodeURIComponent(afterScene)}`
+    : null;
 const runAnalysis = async () => {
 if (beforeScene === afterScene) {
 setError('Before and after scenes must be different.');
@@ -358,44 +370,67 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
         </span>
       </div>
 
-      <div className="analysis-map">
-        <div className="map-grid" />
+      <div className="analysis-map real-imagery-map">
+      <div className="imagery-grid">
+        <div className="imagery-panel">
+          <div className="imagery-label">
+            BEFORE · {selectedBefore ? formatDate(selectedBefore.acquisition_date) : '—'}
+          </div>
 
-        <div className="aoi-shape">
-          <span className="map-label">AOI</span>
+          <img
+            src={beforeImageUrl}
+            alt={`Sentinel-2 imagery from ${
+              selectedBefore
+                ? formatDate(selectedBefore.acquisition_date)
+                : 'before date'
+            }`}
+            className="satellite-image"
+          />
         </div>
 
-        {analysis && (
-          <>
-            <div className="change-zone zone-one" />
-            <div className="change-zone zone-two" />
-            <div className="change-zone zone-three" />
-
-            <div className="map-center-marker">
-              <span />
-            </div>
-          </>
-        )}
-
-        {!analysis && (
-          <div className="map-placeholder">
-            <strong>Temporal change map</strong>
-            <span>
-              Run an analysis to populate the change evidence layer.
-            </span>
+        <div className="imagery-panel">
+          <div className="imagery-label">
+            AFTER · {selectedAfter ? formatDate(selectedAfter.acquisition_date) : '—'}
           </div>
-        )}
 
-        {analysis && (
-          <div className="map-overlay">
-            <span className="overlay-title">Change candidates</span>
-            <strong>{analysis.changed_pixel_count.toLocaleString()}</strong>
-            <span>
-              {analysis.changed_percentage.toFixed(3)}% of valid pixels
-            </span>
+          <div className="overlay-image-container">
+            <img
+              src={afterImageUrl}
+              alt={`Sentinel-2 imagery from ${
+                selectedAfter
+                  ? formatDate(selectedAfter.acquisition_date)
+                  : 'after date'
+              }`}
+              className="satellite-image"
+            />
+
+            {changeOverlayUrl && (
+              <img
+                src={changeOverlayUrl}
+                alt="Spatial change classification overlay"
+                className="change-overlay-image"
+              />
+            )}
           </div>
-        )}
+        </div>
       </div>
+
+  {analysis && (
+    <div className="analysis-status-overlay">
+      <span>CHANGE ANALYSIS</span>
+      <strong>{analysis.changed_pixel_count.toLocaleString()}</strong>
+      <small>
+        candidate pixels · {analysis.changed_percentage.toFixed(3)}%
+      </small>
+    </div>
+  )}
+
+  {!analysis && (
+    <div className="imagery-hint">
+      Select two dates and run change analysis
+    </div>
+  )}
+</div>
 
       <div className="map-legend">
         <span>

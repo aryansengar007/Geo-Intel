@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-
+from backend.app.services.change_overlay import render_change_overlay
 from backend.app.models.schemas import (
     ChangeAnalysisRequest,
     ChangeAnalysisResponse,
@@ -64,7 +65,31 @@ def get_scenes() -> list[dict]:
     north = max(coord[1] for coord in polygon_coords)
     return discover_sentinel2_scenes([west, south, east, north], start_year=2022, end_year=2026, max_cloud_cover=30.0, max_scenes=5)
 
+@app.get("/api/scenes/{scene_id}/preview")
+def get_scene_preview(scene_id: str):
+    preview_path = (
+        PROJECT_ROOT
+        / "data"
+        / "processed"
+        / "tiles"
+        / scene_id
+        / "cloud_masked"
+        / "true_color.png"
+    )
 
+    if not preview_path.is_file():
+        raise HTTPException(
+            status_code=404,
+            detail=f"Preview image not found for scene: {scene_id}",
+        )
+
+    return FileResponse(
+        preview_path,
+        media_type="image/png",
+        filename="true_color.png",
+    )
+    
+    
 @app.get("/api/temporal-coverage")
 def get_temporal_coverage() -> dict:
     years = list(range(2022, 2027))
@@ -146,7 +171,35 @@ def change_analysis(
 
     return ChangeAnalysisResponse(**result)
 
+@app.get("/api/change-analysis/overlay")
+def change_analysis_overlay(
+    before_scene: str,
+    after_scene: str,
+):
+    try:
+        overlay_path = render_change_overlay(
+            before_scene=before_scene,
+            after_scene=after_scene,
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=str(exc),
+        ) from exc
+
+    return FileResponse(
+        overlay_path,
+        media_type="image/png",
+        filename=overlay_path.name,
+    )
+
 if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run("backend.app.main:app", host="0.0.0.0", port=8000, reload=True)
+    

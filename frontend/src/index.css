@@ -757,3 +757,23 @@ textarea {
     flex-wrap: wrap;
   }
 }
+.overlay-image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.overlay-image-container .satellite-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.change-overlay-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}

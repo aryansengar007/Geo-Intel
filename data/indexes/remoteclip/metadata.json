@@ -1,0 +1,23 @@
+{
+  "model": "RemoteCLIP ViT-B/32",
+  "model_weights": "checkpoints\\models--chendelong--RemoteCLIP\\snapshots\\bf1d8a3ccf2ddbf7c875705e46373bfe542bce38\\RemoteCLIP-ViT-B-32.pt",
+  "embedding_dimension": 512,
+  "metric": "cosine_similarity",
+  "index_type": "IndexFlatIP",
+  "vector_count": 1,
+  "records": [
+    {
+      "scene_id": "S2C_MSIL2A_20260910T052641_N0512_R105_T43RFM_20260910T102519",
+      "image_path": "data\\processed\\tiles\\S2C_MSIL2A_20260910T052641_N0512_R105_T43RFM_20260910T102519\\cloud_masked\\true_color.png",
+      "cloud_masked": true,
+      "image_width": 256,
+      "image_height": 512,
+      "mission": "S2C",
+      "acquisition_datetime": "20260910T052641",
+      "processing_baseline": "0512",
+      "relative_orbit": "105",
+      "tile_id": "43RFM",
+      "product_generation_datetime": "20260910T102519"
+    }
+  ]
+}

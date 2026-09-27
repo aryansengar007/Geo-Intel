@@ -1,0 +1,356 @@
+{
+  "baseline_version": "1.0",
+  "scene_id": "S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910",
+  "product_uuid": null,
+  "product_identifier": null,
+  "collection": "sentinel-2-l2a",
+  "satellite": "sentinel-2c",
+  "acquisition_datetime": "2025-12-24T05:32:41.025000+00:00",
+  "tile": "43RGM",
+  "processing_level": "L2",
+  "processing_baseline": "05.11",
+  "scene_level_cloud_cover_percent": 0.0,
+  "aoi": {
+    "identifier": "D:/My Projects/GeoIntel/data/metadata/aoi_gurugram.geojson",
+    "name": "Gurugram study area",
+    "crs": "EPSG:4326",
+    "geometry_type": "Polygon",
+    "geometry_valid": true,
+    "geometry_part_count": 1,
+    "bounds_wgs84": [
+      77.005,
+      28.33,
+      77.11,
+      28.52
+    ],
+    "area_km2": 216.61735679354095,
+    "area_method": "WGS84 ellipsoidal geodesic area from the unchanged GeoJSON geometry using pyproj.Geod",
+    "projected_area_km2_check": 216.66106626021536
+  },
+  "source_assets": [
+    {
+      "asset_key": "B02_10m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B02_10m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T43RGM_20251224T053241_B02_10m.jp2)/$value",
+      "size_bytes": 120569380,
+      "sha256": "420d5668ec2c4ffdf476c874be158f9b417e6f3ab133b00a3b3054115c2319a7"
+    },
+    {
+      "asset_key": "B03_10m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B03_10m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T43RGM_20251224T053241_B03_10m.jp2)/$value",
+      "size_bytes": 123440288,
+      "sha256": "23267a518360f8a10d310aefd969f49c0f4ecc44ec9035a020db2b5a6113f2b0"
+    },
+    {
+      "asset_key": "B04_10m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B04_10m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T43RGM_20251224T053241_B04_10m.jp2)/$value",
+      "size_bytes": 127580068,
+      "sha256": "ac1cedbaada049cacb3b060a949ec07c13aec87e89f62332115eed9ef48fd555"
+    },
+    {
+      "asset_key": "B08_10m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B08_10m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R10m)/Nodes(T43RGM_20251224T053241_B08_10m.jp2)/$value",
+      "size_bytes": 135524712,
+      "sha256": "31e0fce4ef370d777cab9b0a4c36af7749f5730f872407a410f365f1814fde97"
+    },
+    {
+      "asset_key": "B05_20m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B05_20m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T43RGM_20251224T053241_B05_20m.jp2)/$value",
+      "size_bytes": 33733970,
+      "sha256": "aa8456a8a49a958758fe57063ab8a7c10e06ea1541904658d536aabf2f263b2a"
+    },
+    {
+      "asset_key": "B06_20m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B06_20m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T43RGM_20251224T053241_B06_20m.jp2)/$value",
+      "size_bytes": 33727269,
+      "sha256": "c20271883382a21747e2139be3cf6b89c0dca9049f939af63cc5d8c129f03bfc"
+    },
+    {
+      "asset_key": "B07_20m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B07_20m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T43RGM_20251224T053241_B07_20m.jp2)/$value",
+      "size_bytes": 33781845,
+      "sha256": "9d1c43b0441170666746793f4d7d7982df12ddad123835522ac27e1dedd186f3"
+    },
+    {
+      "asset_key": "B11_20m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B11_20m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T43RGM_20251224T053241_B11_20m.jp2)/$value",
+      "size_bytes": 33895259,
+      "sha256": "305d614740502485233fbe12c858e4fa0786a1304f57558214201d84ae483746"
+    },
+    {
+      "asset_key": "B12_20m",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B12_20m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T43RGM_20251224T053241_B12_20m.jp2)/$value",
+      "size_bytes": 33903695,
+      "sha256": "8b76de6341e493dbed230118aa6159ddd236041490889de327e093ac71ac239d"
+    },
+    {
+      "asset_key": "safe_manifest",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/manifest.safe",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(manifest.safe)/$value",
+      "size_bytes": 68907,
+      "sha256": "44917593af248a93df5feed539c9998ed32b7651108681e11c526ac8c196e9c9"
+    },
+    {
+      "asset_key": "product_metadata",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/MTD_MSIL2A.xml",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(MTD_MSIL2A.xml)/$value",
+      "size_bytes": 58081,
+      "sha256": "ff30616c6328a7de873053c25fdd15d3fc0c97ae70ed59362f56b34dc3c8ea1f"
+    },
+    {
+      "asset_key": "granule_metadata",
+      "local_path": "../../GIData/sentinel2/2025/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE/GRANULE/L2A_T43RGM_A006796_20251224T053242/MTD_TL.xml",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(MTD_TL.xml)/$value",
+      "size_bytes": 548079,
+      "sha256": "497173b02af46e395316a264c66898636c8eebb31da40c022c09166738602c2c"
+    },
+    {
+      "asset_key": "SCL_20m",
+      "local_path": "D:\\GIData\\sentinel2\\2025\\S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910\\S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE\\GRANULE\\L2A_T43RGM_A006796_20251224T053242\\IMG_DATA\\R20m\\T43RGM_20251224T053241_SCL_20m.jp2",
+      "source_href": "https://zipper.dataspace.copernicus.eu/odata/v1/Products(7ac32b09-a852-4baa-b01b-2b676b29ebb4)/Nodes(S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE)/Nodes(GRANULE)/Nodes(L2A_T43RGM_A006796_20251224T053242)/Nodes(IMG_DATA)/Nodes(R20m)/Nodes(T43RGM_20251224T053241_SCL_20m.jp2)/$value",
+      "size_bytes": 3663449,
+      "stac_checksum": "162002c409eb1b7386614e6f16bb9fc627beb8511c0cee4da0d8a4468ce14d948e71"
+    }
+  ],
+  "spectral_bands": {
+    "B02": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B02_10m.jp2",
+      "native_resolution_m": [
+        10.0,
+        10.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 1412511,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": -0.0112,
+      "surface_reflectance_max": 1.7544
+    },
+    "B03": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B03_10m.jp2",
+      "native_resolution_m": [
+        10.0,
+        10.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 1412512,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": -0.0263,
+      "surface_reflectance_max": 1.876
+    },
+    "B04": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B04_10m.jp2",
+      "native_resolution_m": [
+        10.0,
+        10.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 1412512,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": -0.0183,
+      "surface_reflectance_max": 1.764
+    },
+    "B05": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B05_20m.jp2",
+      "native_resolution_m": [
+        20.0,
+        20.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 353118,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": -0.0104,
+      "surface_reflectance_max": 0.976
+    },
+    "B06": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B06_20m.jp2",
+      "native_resolution_m": [
+        20.0,
+        20.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 353118,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": -0.0027,
+      "surface_reflectance_max": 0.9475
+    },
+    "B07": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B07_20m.jp2",
+      "native_resolution_m": [
+        20.0,
+        20.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 353118,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": -0.0024,
+      "surface_reflectance_max": 0.9121
+    },
+    "B08": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R10m/T43RGM_20251224T053241_B08_10m.jp2",
+      "native_resolution_m": [
+        10.0,
+        10.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 1412512,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": 0.0008,
+      "surface_reflectance_max": 1.665
+    },
+    "B11": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B11_20m.jp2",
+      "native_resolution_m": [
+        20.0,
+        20.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 353118,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": 0.0106,
+      "surface_reflectance_max": 1.3332
+    },
+    "B12": {
+      "source_path": "GRANULE/L2A_T43RGM_A006796_20251224T053242/IMG_DATA/R20m/T43RGM_20251224T053241_B12_20m.jp2",
+      "native_resolution_m": [
+        20.0,
+        20.0
+      ],
+      "crs": "EPSG:32643",
+      "dtype": "uint16",
+      "nodata": null,
+      "valid_pixels": 353118,
+      "saturated_pixels": 0,
+      "surface_reflectance_min": 0.0057,
+      "surface_reflectance_max": 1.3285
+    }
+  },
+  "quality_layers": {
+    "SCL": {
+      "path": "D:\\GIData\\sentinel2\\2025\\S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910\\S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.SAFE\\GRANULE\\L2A_T43RGM_A006796_20251224T053242\\IMG_DATA\\R20m\\T43RGM_20251224T053241_SCL_20m.jp2",
+      "crs": "EPSG:32643",
+      "resolution_m": [
+        20.0,
+        20.0
+      ],
+      "dtype": "uint8",
+      "nodata": null,
+      "min": 4.0,
+      "max": 10.0
+    },
+    "cloud_probability": null,
+    "snow_probability": null
+  },
+  "preprocessing_configuration": {
+    "pipeline_version": "1.0",
+    "target_crs": "EPSG:32643",
+    "target_resolution_m": 10,
+    "continuous_reflectance_resampling": "bilinear",
+    "categorical_scl_resampling": "nearest-neighbor",
+    "cloud_probability_threshold_percent": 40.0,
+    "snow_probability_threshold_percent": 50.0,
+    "masked_scl_classes": [
+      0,
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11
+    ],
+    "low_probability_cloud_policy": "CLD values >0 and <40 are retained unless SCL independently marks the pixel.",
+    "reflectance_conversion": "surface_reflectance = (DN + BOA_ADD_OFFSET) / BOA_QUANTIFICATION_VALUE",
+    "boa_quantification_value": 10000.0,
+    "boa_add_offsets_by_band_id": {
+      "0": -1000.0,
+      "1": -1000.0,
+      "2": -1000.0,
+      "3": -1000.0,
+      "4": -1000.0,
+      "5": -1000.0,
+      "6": -1000.0,
+      "7": -1000.0,
+      "8": -1000.0,
+      "9": -1000.0,
+      "10": -1000.0,
+      "11": -1000.0,
+      "12": -1000.0
+    },
+    "ndwi_formula": "(B03 - B08) / (B03 + B08), McFeeters green-NIR"
+  },
+  "quality_status": "PASS",
+  "preprocessing_status": "complete_quality_screened",
+  "quality_statistics": {
+    "status": "computed_from_scl_and_probability_rasters",
+    "source": "SCL_20m, CLD_20m, SNW_20m resampled to existing 10 m reflectance grid",
+    "scene_level_cloud_cover_percent": 0.0,
+    "total_aoi_pixels": 1412512,
+    "valid_data_pixels": 1412511,
+    "usable_analysis_pixels": 1412499,
+    "cloud_pixels": 0,
+    "cloud_shadow_pixels": 0,
+    "cirrus_pixels": 12,
+    "snow_ice_pixels": 0,
+    "other_masked_pixels": 1,
+    "low_cloud_probability_retained_pixels": 0,
+    "total_aoi_percent": 100.0,
+    "valid_data_percent": 99.99992920414128,
+    "usable_analysis_percent": 99.99907965383657,
+    "cloud_percent": 0.0,
+    "cloud_shadow_percent": 0.0,
+    "cirrus_percent": 0.000849550304705376,
+    "snow_ice_percent": 0.0,
+    "other_masked_percent": 7.0795858725448e-05,
+    "low_cloud_probability_retained_percent": 0.0,
+    "cloud_probability_threshold_percent": 40.0,
+    "snow_probability_threshold_percent": 50.0,
+    "low_cloud_probability_policy": "CLD values 1-39% are retained unless an SCL class independently masks the pixel.",
+    "cloud_mask_scl_classes": [
+      8,
+      9
+    ],
+    "cloud_shadow_scl_class": 3,
+    "cast_shadow_scl_class_2_is_masked_as_other": true,
+    "masked_pixel_percent": 0.0009203461634308239
+  },
+  "reflectance_review": {
+    "review_range": [
+      -0.2,
+      2.0
+    ],
+    "notes": [],
+    "source_values_retained": true,
+    "source_jp2_inspected": true
+  },
+  "warnings": [],
+  "quality_observations": [
+    "Historical area values recorded for audit: declared 247.0 km2 and legacy approximation 89.00036671680397 km2; current authoritative area is calculated directly from the unchanged polygon."
+  ],
+  "quality_report_json": "data/metadata/quality/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.quality.json",
+  "provenance_json": "data/metadata/downloads/S2C_MSIL2A_20251224T053241_N0511_R105_T43RGM_20251224T091910.provenance.json",
+  "created_at": "2026-09-27T06:50:39.689646+00:00"
+}

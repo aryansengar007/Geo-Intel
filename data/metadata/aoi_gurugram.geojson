@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "name": "gurugram_study_area",
+  "crs": {
+    "type": "name",
+    "properties": {"name": "EPSG:4326"}
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gurugram study area",
+        "description": "Documented operational polygon for the Gurugram AOI used in GeoIntel development. This is a study-area polygon rather than an official administrative boundary.",
+        "source": "manual_study_area_polygon",
+        "source_method": "documented operational polygon approximating the Gurugram urban area, not an official administrative boundary",
+        "area_km2": 216.61735679354095,
+        "area_km2_geodesic": 216.61735679354095,
+        "area_km2_estimate": 216.61735679354095,
+        "area_method": "WGS84 ellipsoidal geodesic area computed from this unchanged EPSG:4326 polygon with pyproj.Geod",
+        "area_crs": "EPSG:4326 (WGS84 ellipsoid)",
+        "area_km2_utm_epsg32643_check": 216.66106626021536,
+        "previous_declared_area_km2": 247.0,
+        "previous_legacy_backend_area_km2": 89.00036671680397,
+        "previous_legacy_backend_method": "planar square-degree area multiplied by 111.32 squared and a hardcoded 0.36 factor"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.0050, 28.3300],
+            [77.1100, 28.3300],
+            [77.1100, 28.5200],
+            [77.0050, 28.5200],
+            [77.0050, 28.3300]
+          ]
+        ]
+      }
+    }
+  ]
+}

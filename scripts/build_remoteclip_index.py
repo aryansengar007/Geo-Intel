@@ -25,6 +25,10 @@ MODEL_PATH = (
 
 IMAGE_NAME = "true_color.png"
 
+# Primary GeoIntel study-area scenes.
+# Keep the benchmark on the common 43RGM tile.
+PRIMARY_TILE = "43RGM"
+
 
 def extract_scene_id(image_path: Path) -> str:
     """
@@ -99,12 +103,14 @@ def main():
         TILES_ROOT.rglob(IMAGE_NAME)
     )
 
-    # Avoid indexing the same Sentinel-2 scene twice.
-    # Prefer the cloud-masked version when available.
+    # Select one cloud-masked true-color image per primary 43RGM scene.
     selected = {}
 
     for image_path in image_paths:
         scene_id = extract_scene_id(image_path)
+
+        if PRIMARY_TILE not in scene_id:
+            continue
 
         is_cloud_masked = "cloud_masked" in image_path.parts
 
@@ -116,10 +122,11 @@ def main():
     records = []
 
     print(f"\nDiscovered {len(image_paths)} true-color files.")
-    print(f"Unique scenes: {len(selected)}")
+    print(f"Primary tile: {PRIMARY_TILE}")
+    print(f"Unique primary scenes: {len(selected)}")
 
     for scene_id, (image_path, is_cloud_masked) in sorted(selected.items()):
-        print(f"\nProcessing:")
+        print("\nProcessing:")
         print(f"  Scene: {scene_id}")
         print(f"  Image: {image_path}")
         print(f"  Cloud masked: {is_cloud_masked}")
@@ -147,16 +154,16 @@ def main():
                 "cloud_masked": is_cloud_masked,
                 "image_width": image.width,
                 "image_height": image.height,
+                "retrieval_scope": "primary_43RGM",
                 **metadata,
             }
         )
 
-        # Temporarily attach vector for index construction.
         records[-1]["_embedding"] = vector
 
     if not records:
         raise RuntimeError(
-            f"No {IMAGE_NAME} files found under {TILES_ROOT}"
+            f"No primary {IMAGE_NAME} files found under {TILES_ROOT}"
         )
 
     embeddings = np.vstack(
@@ -186,6 +193,7 @@ def main():
         "metric": "cosine_similarity",
         "index_type": "IndexFlatIP",
         "vector_count": len(records),
+        "retrieval_scope": "primary_43RGM",
         "records": records,
     }
 
@@ -202,6 +210,7 @@ def main():
     print(f"Vectors     : {len(records)}")
     print(f"Dimension   : {dimension}")
     print(f"Metric      : cosine similarity")
+    print(f"Scope       : primary Sentinel-2 tile {PRIMARY_TILE}")
 
 
 if __name__ == "__main__":

@@ -34,6 +34,26 @@ pixel_count: number;
 percentage_of_valid_pixels: number;
 };
 
+type SearchResult = {
+  rank: number;
+  score: number;
+  scene_id: string;
+  image_path: string;
+  cloud_masked: boolean;
+  acquisition_datetime: string;
+  tile_id: string;
+  mission: string;
+  relative_orbit: string;
+};
+
+type SemanticSearchResponse = {
+  query: string;
+  model: string;
+  device: string;
+  total_indexed_vectors: number;
+  results: SearchResult[];
+};
+
 type ChangeAnalysis = {
 before_scene: string;
 after_scene: string;
@@ -112,6 +132,11 @@ const [analysis, setAnalysis] = useState<ChangeAnalysis | null>(null);
 const [loading, setLoading] = useState(true);
 const [analyzing, setAnalyzing] = useState(false);
 const [error, setError] = useState('');
+
+const [searchQuery, setSearchQuery] = useState('urban area and buildings');
+const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+const [searching, setSearching] = useState(false);
+const [searchError, setSearchError] = useState('');
 
 useEffect(() => {
 const fetchInitialData = async () => {
@@ -228,6 +253,51 @@ try {
   setAnalyzing(false);
 }
 
+};
+const runSemanticSearch = async (query = searchQuery) => {
+  const trimmedQuery = query.trim();
+
+  if (!trimmedQuery) {
+    setSearchError('Enter a semantic search query.');
+    return;
+  }
+
+  setSearching(true);
+  setSearchError('');
+
+  try {
+    const response = await fetch(`${API_BASE}/api/search`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: trimmedQuery,
+        top_k: 5,
+      }),
+    });
+
+    const result: SemanticSearchResponse = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result?.results
+          ? 'Semantic search failed.'
+          : 'Semantic search service is unavailable.',
+      );
+    }
+
+    setSearchResults(result.results);
+  } catch (requestError) {
+    setSearchResults([]);
+    setSearchError(
+      requestError instanceof Error
+        ? requestError.message
+        : 'Unable to run semantic search.',
+    );
+  } finally {
+    setSearching(false);
+  }
 };
 
 const timelineYears = [2022, 2023, 2024, 2025, 2026];
@@ -371,6 +441,9 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
       </div>
 
       <div className="analysis-map real-imagery-map">
+        <div className="temporal-badge">
+          MULTI-TEMPORAL COMPARISON · {selectedBefore ? formatDate(selectedBefore.acquisition_date) : '—'} → {selectedAfter ? formatDate(selectedAfter.acquisition_date) : '—'}
+        </div>
       <div className="imagery-grid">
         <div className="imagery-panel">
           <div className="imagery-label">
@@ -416,12 +489,42 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
       </div>
 
   {analysis && (
-    <div className="analysis-status-overlay">
-      <span>CHANGE ANALYSIS</span>
-      <strong>{analysis.changed_pixel_count.toLocaleString()}</strong>
-      <small>
-        candidate pixels · {analysis.changed_percentage.toFixed(3)}%
-      </small>
+    <div className="change-legend">
+      <div className="change-legend-title">
+        CHANGE CLASSIFICATION
+      </div>
+
+      <div className="change-legend-items">
+        <span>
+          <i className="legend-dot vegetation-loss" />
+          Vegetation loss
+        </span>
+
+        <span>
+          <i className="legend-dot vegetation-growth" />
+          Vegetation growth
+        </span>
+
+        <span>
+          <i className="legend-dot water-expansion" />
+          Water expansion
+        </span>
+
+        <span>
+          <i className="legend-dot water-contraction" />
+          Water contraction
+        </span>
+
+        <span>
+          <i className="legend-dot built-up" />
+          Built-up / construction
+        </span>
+
+        <span>
+          <i className="legend-dot other-change" />
+          Other surface change
+        </span>
+      </div>
     </div>
   )}
 
@@ -580,6 +683,142 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
       </div>
     </aside>
   </main>
+
+    <section className="panel semantic-panel">
+    <div className="semantic-header">
+      <div>
+        <span className="eyebrow">Semantic Retrieval</span>
+        <h3>Search Satellite Scenes by Meaning</h3>
+        <p className="text-muted">
+          Natural-language retrieval over indexed Sentinel-2 imagery using
+          RemoteCLIP semantic embeddings.
+        </p>
+      </div>
+
+      <div className="semantic-meta">
+        <span className="pill">RemoteCLIP ViT-B/32</span>
+        <span className="pill">5 indexed scenes</span>
+        <span className="pill">43RGM</span>
+        <span className="pill">CUDA</span>
+      </div>
+    </div>
+
+    <div className="semantic-search-row">
+      <input
+        className="search-input"
+        type="text"
+        value={searchQuery}
+        onChange={(event) => setSearchQuery(event.target.value)}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            runSemanticSearch();
+          }
+        }}
+        placeholder="e.g. urban area and buildings"
+      />
+
+      <button
+        className="primary-button search-button"
+        onClick={() => runSemanticSearch()}
+        disabled={searching}
+      >
+        {searching ? 'Searching...' : 'Search Scenes'}
+      </button>
+    </div>
+
+    <div className="semantic-presets">
+      <span className="field-hint">Try:</span>
+
+      {[
+        'urban area and buildings',
+        'vegetation and trees',
+        'water bodies',
+        'roads and transport',
+      ].map((query) => (
+        <button
+          key={query}
+          className="preset-button"
+          onClick={() => {
+            setSearchQuery(query);
+            runSemanticSearch(query);
+          }}
+          disabled={searching}
+        >
+          {query}
+        </button>
+      ))}
+    </div>
+
+    {searchError && (
+      <div className="error-box">{searchError}</div>
+    )}
+
+    {searchResults.length > 0 && (
+      <div className="semantic-results">
+        {searchResults.map((result) => {
+          const acquisitionDate = `${result.acquisition_datetime.slice(
+            0,
+            4,
+          )}-${result.acquisition_datetime.slice(
+            4,
+            6,
+          )}-${result.acquisition_datetime.slice(6, 8)}`;
+
+          const imageUrl =
+            `${API_BASE}/api/scenes/${encodeURIComponent(
+              result.scene_id,
+            )}/preview`;
+
+          return (
+            <article
+              className="semantic-result-card"
+              key={result.scene_id}
+            >
+              <img
+                src={imageUrl}
+                alt={`Satellite scene from ${acquisitionDate}`}
+                className="semantic-result-image"
+              />
+
+              <div className="semantic-result-content">
+                <div className="semantic-result-top">
+                  <span className="result-rank">
+                    #{result.rank}
+                  </span>
+
+                  <span className="result-date">
+                    {acquisitionDate}
+                  </span>
+                </div>
+
+                <strong>
+                  Similarity {result.score.toFixed(3)}
+                </strong>
+
+                <span className="field-hint">
+                  {result.mission} · Tile {result.tile_id} ·
+                  Orbit {result.relative_orbit}
+                </span>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    )}
+
+    {searchResults.length === 0 && !searching && !searchError && (
+      <div className="imagery-hint semantic-empty">
+        Enter a natural-language query or select a preset to retrieve
+        relevant satellite scenes.
+      </div>
+    )}
+
+    <p className="provenance-note semantic-note">
+      Retrieval scores represent cosine similarity between the text query
+      and indexed image embeddings. They are ranking scores, not
+      classification probabilities.
+    </p>
+  </section>
 
   <footer className="timeline-panel">
     <span className="timeline-label">Temporal coverage</span>

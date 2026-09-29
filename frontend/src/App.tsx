@@ -426,19 +426,56 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
     </aside>
 
     <section className="panel map-panel">
-      <div className="map-header">
-        <div>
-          <span className="eyebrow">Temporal Analysis</span>
-          <div className="map-title">
-            {selectedBefore ? formatDate(selectedBefore.acquisition_date) : '—'} →{' '}
-            {selectedAfter ? formatDate(selectedAfter.acquisition_date) : '—'}
-          </div>
-        </div>
+      <div className="imagery-workspace-header">
+  <div className="imagery-title-group">
+    <div className="imagery-title-row">
+      <span className="eyebrow">Temporal Analysis</span>
+      <span className="comparison-badge">BEFORE / AFTER</span>
+    </div>
 
-        <span className="eyebrow muted">
-          {aoi?.name ?? 'GURUGRAM'}
-        </span>
-      </div>
+    <div className="map-title">
+      {selectedBefore
+        ? formatDate(selectedBefore.acquisition_date)
+        : '—'}{' '}
+      <span className="date-arrow">→</span>{' '}
+      {selectedAfter
+        ? formatDate(selectedAfter.acquisition_date)
+        : '—'}
+    </div>
+  </div>
+
+  <div className="imagery-toolbar">
+    <div className="toolbar-item">
+      <span className="toolbar-label">AOI</span>
+      <strong>{aoi?.name ?? 'GURUGRAM'}</strong>
+    </div>
+
+    <div className="toolbar-divider" />
+
+    <div className="toolbar-item">
+      <span className="toolbar-label">MODE</span>
+      <strong>TRUE COLOR</strong>
+    </div>
+
+    <div className="toolbar-divider" />
+
+    <div className="toolbar-item">
+      <span className="toolbar-label">RESOLUTION</span>
+      <strong>10 m</strong>
+    </div>
+
+    {changeOverlayUrl && (
+      <>
+        <div className="toolbar-divider" />
+
+        <div className="toolbar-status">
+          <span className="toolbar-status-dot" />
+          CHANGE OVERLAY
+        </div>
+      </>
+    )}
+  </div>
+</div>
 
       <div className="analysis-map real-imagery-map">
         <div className="temporal-badge">
@@ -447,7 +484,10 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
       <div className="imagery-grid">
         <div className="imagery-panel">
           <div className="imagery-label">
-            BEFORE · {selectedBefore ? formatDate(selectedBefore.acquisition_date) : '—'}
+            <span className="imagery-label-main">BEFORE</span>
+            <span className="imagery-label-date">
+              {selectedBefore ? formatDate(selectedBefore.acquisition_date) : '—'}
+            </span>
           </div>
 
           <img
@@ -459,11 +499,25 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
             }`}
             className="satellite-image"
           />
+          <div className="imagery-footer">
+            <span>Sentinel-2 L2A</span>
+            <span>10 m</span>
+            <span>{selectedBefore?.tile_id ?? '43RGM'}</span>
+          </div>
         </div>
 
         <div className="imagery-panel">
           <div className="imagery-label">
-            AFTER · {selectedAfter ? formatDate(selectedAfter.acquisition_date) : '—'}
+            <span className="imagery-label-main">AFTER</span>
+            <span className="imagery-label-date">
+              {selectedAfter ? formatDate(selectedAfter.acquisition_date) : '—'}
+            </span>
+
+            {changeOverlayUrl && (
+              <span className="overlay-active-badge">
+                  OVERLAY
+              </span>
+            )}
           </div>
 
           <div className="overlay-image-container">
@@ -476,6 +530,11 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
               }`}
               className="satellite-image"
             />
+            <div className="imagery-footer">
+              <span>Sentinel-2 L2A</span>
+              <span>10 m</span>
+              <span>{selectedAfter?.tile_id ?? '43RGM'}</span>
+            </div>
 
             {changeOverlayUrl && (
               <img
@@ -489,44 +548,54 @@ Semantic Retrieval & Multi-Temporal Satellite Analysis
       </div>
 
   {analysis && (
-    <div className="change-legend">
-      <div className="change-legend-title">
-        CHANGE CLASSIFICATION
-      </div>
+  <div className="change-legend">
+    <div className="change-legend-header">
+  <div>
+    <span className="change-legend-title">
+      CHANGE CLASSIFICATION
+    </span>
+    <span className="change-legend-subtitle">
+      Algorithmic candidate changes requiring analyst review
+    </span>
+  </div>
 
-      <div className="change-legend-items">
-        <span>
-          <i className="legend-dot vegetation-loss" />
-          Vegetation loss
-        </span>
+  <span className="change-legend-count">
+    {analysis.changed_pixel_count.toLocaleString()} candidates
+  </span>
+</div>
 
-        <span>
-          <i className="legend-dot vegetation-growth" />
-          Vegetation growth
-        </span>
+<div className="change-legend-items">
+  {analysis.change_classes.map((item) => (
+    <div
+      key={item.change_class}
+      className={`change-legend-item ${
+        item.change_class === 'vegetation_loss'
+          ? 'vegetation-loss'
+          : item.change_class === 'vegetation_growth'
+            ? 'vegetation-growth'
+            : item.change_class === 'water_expansion'
+              ? 'water-expansion'
+              : item.change_class === 'water_contraction'
+                ? 'water-contraction'
+                : item.change_class === 'built_up_construction'
+                  ? 'built-up'
+                  : 'other-change'
+      }`}
+    >
+      <span className="legend-dot" />
 
-        <span>
-          <i className="legend-dot water-expansion" />
-          Water expansion
-        </span>
+      <span className="legend-label">
+        {classLabels[item.change_class] ?? item.change_class}
+      </span>
 
-        <span>
-          <i className="legend-dot water-contraction" />
-          Water contraction
-        </span>
-
-        <span>
-          <i className="legend-dot built-up" />
-          Built-up / construction
-        </span>
-
-        <span>
-          <i className="legend-dot other-change" />
-          Other surface change
-        </span>
-      </div>
+      <span className="legend-count">
+        {item.pixel_count.toLocaleString()}
+      </span>
     </div>
-  )}
+  ))}
+</div>
+  </div>
+)}
 
   {!analysis && (
     <div className="imagery-hint">
